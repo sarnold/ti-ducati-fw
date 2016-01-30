@@ -93,10 +93,10 @@ fi
 cd ${BUILD_DIR}
 
 if [ ! -e ${BUILD_DIR}/xdc ]; then
-	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_25_03_72/exports/xdctools_setuplinux_3_25_03_72.bin
+	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_25_06_96/exports/xdctools_setuplinux_3_25_06_96.bin
 	chmod +x *.bin
-	./xdctools_setuplinux_3_25_03_72.bin --mode silent --response-file ../response_xdc.txt
-	mv xdctools_3_25_03_72 xdc
+	./xdctools_setuplinux_3_25_06_96.bin --mode unattended --prefix .
+	mv xdctools_3_25_06_96 xdc
 fi
 
 if [ ! -e ${BUILD_DIR}/cgt ]; then
