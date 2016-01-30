@@ -4,6 +4,6 @@ InstallDir: .
 InstallMode: Console
 InstallType: Typical
 LaunchApplication: Yes
-ProgramFolderName: XDCtools 3.24.07.73
+ProgramFolderName: XDCtools 3.25.03.72
 SelectedComponents: Default Component
 ViewReadme: Yes

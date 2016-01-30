@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ZIP=`zip -v 2> /dev/null`
 WGET=`wget --version 2> /dev/null`
@@ -93,17 +93,13 @@ fi
 cd ${BUILD_DIR}
 
 if [ ! -e ${BUILD_DIR}/xdc ]; then
-	cd ${BUILD_DIR}/xdc
-	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_24_07_73/exports/xdctools_setuplinux_3_24_07_73.bin
+	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_25_03_72/exports/xdctools_setuplinux_3_25_03_72.bin
 	chmod +x *.bin
-	./xdctools_setuplinux_3_24_07_73.bin --mode silent --response-file ../response_xdc.txt
-	mv xdctools_3_24_07_73 xdc
+	./xdctools_setuplinux_3_25_03_72.bin --mode silent --response-file ../response_xdc.txt
+	mv xdctools_3_25_03_72 xdc
 fi
 
-cd ${BUILD_DIR}
-
 if [ ! -e ${BUILD_DIR}/cgt ]; then
-	cd ${BUILD_DIR}
 	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_5.2.6 -O ti_cgt_tms470_5.2.6_linux_installer_x86.zip
 	unzip ti_cgt_tms470_5.2.6_linux_installer_x86.zip
 	chmod +x downloads/*.bin
