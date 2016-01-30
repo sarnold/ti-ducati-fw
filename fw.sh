@@ -93,22 +93,20 @@ fi
 cd ${BUILD_DIR}
 
 if [ ! -e ${BUILD_DIR}/xdc ]; then
-	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_25_06_96/exports/xdctools_setuplinux_3_25_06_96.bin
-	chmod +x *.bin
-	./xdctools_setuplinux_3_25_06_96.bin --mode unattended --prefix .
-	mv xdctools_3_25_06_96 xdc
+	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_31_02_38/exports/xdccore/xdctools_3_31_02_38_core_linux.zip
+	unzip xdctools_*_core_linux.zip
+	mv xdctools_*_core xdc
 fi
 
 if [ ! -e ${BUILD_DIR}/cgt ]; then
 	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_5.2.6 -O ti_cgt_tms470_5.2.6_linux_installer_x86.zip
-	unzip ti_cgt_tms470_5.2.6_linux_installer_x86.zip
+	unzip ti_cgt_tms470*.zip
 	chmod +x downloads/*.bin
 	downloads/ti_cgt_tms470_5.2.6_linux_installer_x86.bin --mode unattended --prefix .
 	mv ti-cgt-arm_5.2.6 cgt
 fi
 
 rm -rf downloads
-rm *.bin
 rm *.zip
 
 cd ${BASE_ROOT}
