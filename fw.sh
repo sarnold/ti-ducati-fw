@@ -102,8 +102,8 @@ if [ ! -e ${BUILD_DIR}/cgt ]; then
 	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_5.2.6 -O ti_cgt_tms470_5.2.6_linux_installer_x86.zip
 	unzip ti_cgt_tms470*.zip
 	chmod +x downloads/*.bin
-	downloads/ti_cgt_tms470_5.2.6_linux_installer_x86.bin --mode unattended --prefix .
-	mv ti-cgt-arm_5.2.6 cgt
+	downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
+	mv ti-cgt-arm_* cgt
 fi
 
 rm -rf downloads
