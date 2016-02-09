@@ -93,7 +93,7 @@ fi
 cd ${BUILD_DIR}
 
 if [ ! -e ${BUILD_DIR}/xdc ]; then
-	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_31_02_38/exports/xdccore/xdctools_3_31_02_38_core_linux.zip
+	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_32_00_06/exports/xdccore/xdctools_3_32_00_06_core_linux.zip
 	unzip xdctools_*_core_linux.zip
 	mv xdctools_*_core xdc
 fi
