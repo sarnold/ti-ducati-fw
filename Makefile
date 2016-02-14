@@ -49,13 +49,13 @@ bios_clean:
 	$(MAKE) -C $(BIOS_INSTALL_DIR) $(BIOS_CONF) -f bios.mak clean
 
 rpmsg:.
-	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF)
+	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) all
 
 rpmsg_clean:
 	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) clean
 
 ipumm:
-	$(MAKE) -C $(IPUMM_INSTALL_DIR) $(IPUMM_CONF)
+	$(MAKE) -C $(IPUMM_INSTALL_DIR) $(IPUMM_CONF) all
 
 ipumm_clean:
 	$(MAKE) -C $(IPUMM_INSTALL_DIR) $(IPUMM_CONF) clean
