@@ -148,4 +148,13 @@ fi
 
 cd ${BASE_ROOT}
 
-make all
+case $GCC in
+	yes)
+		TARGET=gnu.targets.arm.M3
+		;;
+	*)
+		TARGET=ti.targets.arm.M3
+		;;
+esac
+
+make TARGET=${TARGET} all
