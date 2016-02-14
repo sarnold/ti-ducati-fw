@@ -140,6 +140,7 @@ if [ ! -e ${BUILD_DIR}/armt ]; then
 			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
 			rm -rf downloads
 			mv ti-cgt-arm_* armt
+			rm -f *.zip
 			;;
 		esac
 		;;
@@ -153,7 +154,7 @@ case $GCC in
 		TARGET=gnu.targets.arm.M3
 		;;
 	*)
-		TARGET=ti.targets.arm.M3
+		TARGET=ti.targets.arm.elf.M3
 		;;
 esac
 
