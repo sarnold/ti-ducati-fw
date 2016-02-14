@@ -13,37 +13,37 @@ ipu_clean: rpmsg_clean ipumm_clean
 clean: bios_clean osal_clean ipc_clean xdais_clean fc_clean ce_clean rpmsg_clean ipumm_clean
 
 ipc:
-	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) ti.targets.arm.elf.M3=${TMS470CGTOOLPATH} -ef ipc.mak all
+	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) -ef ipc.mak all
 
 ipc_clean:
 	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) -f ipc.mak clean
 
 fc:
-	$(MAKE) -C $(FC_INSTALL_DIR) $(FC_CONF) ti.targets.arm.elf.M3=${TMS470CGTOOLPATH} -ef fc.mak all
+	$(MAKE) -C $(FC_INSTALL_DIR) $(FC_CONF) -ef fc.mak all
 
 fc_clean:
 	$(MAKE) -C $(FC_INSTALL_DIR) $(FC_CONF) -f fc.mak clean
 
 ce:
-	$(MAKE) -C $(CE_INSTALL_DIR) $(CE_CONF) ti.targets.arm.elf.M3=${TMS470CGTOOLPATH} -ef codec_engine.mak all
+	$(MAKE) -C $(CE_INSTALL_DIR) $(CE_CONF) -ef codec_engine.mak all
 
 ce_clean:
 	$(MAKE) -C $(CE_INSTALL_DIR) $(CE_CONF) -f codec_engine.mak clean
 
 xdais:
-	$(MAKE) -C $(XDAIS_INSTALL_DIR) $(XDAIS_CONF) ti.targets.arm.elf.M3=${TMS470CGTOOLPATH} -ef xdais.mak all
+	$(MAKE) -C $(XDAIS_INSTALL_DIR) $(XDAIS_CONF) -ef xdais.mak all
 
 xdais_clean:
 	$(MAKE) -C $(XDAIS_INSTALL_DIR) $(XDAIS_CONF) -f xdais.mak clean
 
 osal:
-	$(MAKE) -C $(OSAL_INSTALL_DIR) $(OSAL_CONF) ti.targets.arm.elf.M3=${TMS470CGTOOLPATH} -ef osal.mak all
+	$(MAKE) -C $(OSAL_INSTALL_DIR) $(OSAL_CONF) -ef osal.mak all
 
 osal_clean:
 	$(MAKE) -C $(OSAL_INSTALL_DIR) $(OSAL_CONF) -f osal.mak clean
 
 bios:
-	$(MAKE) -C $(BIOS_INSTALL_DIR) $(BIOS_CONF) ti.targets.arm.elf.M3=${TMS470CGTOOLPATH} -f bios.mak all
+	$(MAKE) -C $(BIOS_INSTALL_DIR) $(BIOS_CONF) -ef bios.mak all
 
 bios_clean:
 	$(MAKE) -C $(BIOS_INSTALL_DIR) $(BIOS_CONF) -f bios.mak clean

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+GCC=no # GCC not supported yet, still issues with memory regions while linking
+
 ZIP=`zip -v 2> /dev/null`
 WGET=`wget --version 2> /dev/null`
 
@@ -93,21 +95,56 @@ fi
 cd ${BUILD_DIR}
 
 if [ ! -e ${BUILD_DIR}/xdc ]; then
-	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_32_00_06/exports/xdccore/xdctools_3_32_00_06_core_linux.zip
-	unzip xdctools_*_core_linux.zip
+	case `uname -s` in
+	Darwin)
+		wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_32_00_06/exports/xdccore/xdctools_3_32_00_06_core_macos.zip
+		;;
+	Linux)
+		wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_32_00_06/exports/xdccore/xdctools_3_32_00_06_core_linux.zip
+		;;
+	esac
+	unzip xdctools_*_core_*.zip
+	rm -f *.zip
 	mv xdctools_*_core xdc
 fi
 
-if [ ! -e ${BUILD_DIR}/cgt ]; then
-	wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_5.2.6 -O ti_cgt_tms470_5.2.6_linux_installer_x86.zip
-	unzip ti_cgt_tms470*.zip
-	chmod +x downloads/*.bin
-	downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
-	mv ti-cgt-arm_* cgt
+if [ ! -e ${BUILD_DIR}/armt ]; then
+	case $GCC in
+	yes)
+		# TODO: original toolchain from site does not have needed libc lock changes.
+		# it need to bo patched and rebuilded
+		case `uname -s` in
+		Darwin)
+			wget https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-mac.tar.bz2
+#			wget https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q3-update/+download/gcc-arm-none-eabi-4_7-2013q3-20130916-mac.tar.bz2
+			;;
+		Linux)
+			wget https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
+#			wget https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q3-update/+download/gcc-arm-none-eabi-4_7-2013q3-20130916-linux.tar.bz2
+			;;
+		esac
+		tar xjvf gcc-arm-none-eabi-4*.tar.bz2
+		rm -f *.bz2
+		mv gcc-arm-none-eabi-4_* armt
+		;;
+	*)
+		case `uname -s` in
+		Darwin)
+			echo "Not supported, lack of Mac OS X toolchain on TI site yet!"
+			exit 1
+			;;
+		Linux)
+			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_5.2.6 -O ti_cgt_tms470_5.2.6_linux_installer_x86.zip
+			unzip ti_cgt_tms470*.zip
+			chmod +x downloads/*.bin
+			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
+			rm -rf downloads
+			mv ti-cgt-arm_* armt
+			;;
+		esac
+		;;
+	esac
 fi
-
-rm -rf downloads
-rm *.zip
 
 cd ${BASE_ROOT}
 
