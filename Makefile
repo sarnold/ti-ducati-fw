@@ -49,14 +49,12 @@ bios_clean:
 	$(MAKE) -C $(BIOS_INSTALL_DIR) $(BIOS_CONF) -f bios.mak clean
 
 rpmsg:.
-	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) smp_config
 	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF)
 
 rpmsg_clean:
 	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) clean
 
 ipumm:
-	$(MAKE) -C $(IPUMM_INSTALL_DIR) $(IPUMM_CONF) omap4_smp_config
 	$(MAKE) -C $(IPUMM_INSTALL_DIR) $(IPUMM_CONF)
 
 ipumm_clean:
