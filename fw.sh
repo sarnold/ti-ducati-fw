@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TCGARMVERSION=5.2.7
+
 GCC=no # GCC not supported yet, still issues with memory regions while linking
 
 ZIP=`zip -v 2> /dev/null`
@@ -130,14 +132,19 @@ if [ ! -e ${BUILD_DIR}/armt ]; then
 	*)
 		case `uname -s` in
 		Darwin)
-			echo "Not supported, lack of Mac OS X toolchain on TI site yet!"
-			exit 1
+			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2mac/binary/com.ti.cgt.tms470.5.2.mac_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_osx_installer.zip
+			unzip ti_cgt_tms470*.zip
+			chmod +x downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel
+			downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel --mode unattended
+			rm -rf downloads
+			mv ti-cgt-arm_* armt
+			rm -f *.zip
 			;;
 		Linux)
-			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_5.2.7 -O ti_cgt_tms470_5.2.7_linux_installer_x86.zip
+			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.zip
 			unzip ti_cgt_tms470*.zip
 			chmod +x downloads/*.bin
-			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
+			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
 			rm -rf downloads
 			mv ti-cgt-arm_* armt
 			rm -f *.zip
