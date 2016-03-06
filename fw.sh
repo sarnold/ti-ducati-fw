@@ -144,10 +144,10 @@ if [ ! -e ${BUILD_DIR}/armt ]; then
 			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
 			;;
 		esac
-		;;
 		mv ti-cgt-arm_* armt
 		rm -rf downloads
 		rm -f *.zip
+		;;
 	esac
 fi
 
