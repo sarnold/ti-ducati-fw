@@ -136,8 +136,8 @@ if [ ! -e ${BUILD_DIR}/armt ]; then
 			unzip ti_cgt_tms470*.zip
 			chmod +x downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel
 			downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel --mode unattended
-			rm -rf downloads
 			mv ti-cgt-arm_* armt
+			rm -rf downloads
 			rm -f *.zip
 			;;
 		Linux)
@@ -145,8 +145,8 @@ if [ ! -e ${BUILD_DIR}/armt ]; then
 			unzip ti_cgt_tms470*.zip
 			chmod +x downloads/*.bin
 			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
-			rm -rf downloads
 			mv ti-cgt-arm_* armt
+			rm -rf downloads
 			rm -f *.zip
 			;;
 		esac
