@@ -136,21 +136,18 @@ if [ ! -e ${BUILD_DIR}/armt ]; then
 			unzip ti_cgt_tms470*.zip
 			chmod +x downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel
 			downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel --mode unattended
-			mv ti-cgt-arm_* armt
-			rm -rf downloads
-			rm -f *.zip
 			;;
 		Linux)
 			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.5.2.linux_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.zip
 			unzip ti_cgt_tms470*.zip
 			chmod +x downloads/*.bin
 			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
-			mv ti-cgt-arm_* armt
-			rm -rf downloads
-			rm -f *.zip
 			;;
 		esac
 		;;
+		mv ti-cgt-arm_* armt
+		rm -rf downloads
+		rm -f *.zip
 	esac
 fi
 
