@@ -1,6 +1,7 @@
 #!/bin/bash
 
 TCGARMVERSION=5.2.7
+XDCCOREVERSION=3_32_00_06
 
 GCC=no # GCC not supported yet, still issues with memory regions while linking
 
@@ -99,10 +100,10 @@ cd ${BUILD_DIR}
 if [ ! -e ${BUILD_DIR}/xdc ]; then
 	case `uname -s` in
 	Darwin)
-		wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_32_00_06/exports/xdccore/xdctools_3_32_00_06_core_macos.zip
+		wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${XDCCOREVERSION}/exports/xdccore/xdctools_${XDCCOREVERSION}_core_macos.zip
 		;;
 	Linux)
-		wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/3_32_00_06/exports/xdccore/xdctools_3_32_00_06_core_linux.zip
+		wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${XDCCOREVERSION}/exports/xdccore/xdctools_${XDCCOREVERSION}_core_linux.zip
 		;;
 	esac
 	unzip xdctools_*_core_*.zip
