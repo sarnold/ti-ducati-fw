@@ -6,7 +6,7 @@ fetch_repo() # directory, repo-url
 	url="$2"
 	if [ "$1" != "" ] || [ "$2" != "" ]; then
 		if [ ! -e ${directory} ]; then
-			git clone git://github.com/mobiaqua/ti-sysbios.git ${directory}
+			git clone ${url} ${directory}
 			cd ${directory}
 		else
 			cd ${directory}
