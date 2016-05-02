@@ -100,10 +100,15 @@ prepare_arm_compiler()
 	cd ${BASE_ROOT}
 }
 
+GCC=no # GCC not supported yet, still issues with memory regions while linking
+C64T=yes
 TCGARMVERSION=5.2.7
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
-XDCCOREVERSION=3_32_00_06
-GCC=no # GCC not supported yet, still issues with memory regions while linking
+if [ "$C64T" == "yes" ]; then
+	XDCCOREVERSION=3_31_03_43
+else
+	XDCCOREVERSION=3_32_00_06
+fi
 
 check_tools
 
@@ -111,7 +116,11 @@ BASE_ROOT=`pwd`
 BUILD_DIR=${BASE_ROOT}/sources
 mkdir -f ${BUILD_DIR} 2> /dev/null
 
-fetch_repo bios git://github.com/mobiaqua/ti-sysbios.git
+if [ "$C64T" == "yes" ]; then
+	fetch_repo bios git://github.com/mobiaqua/ti-sysbios-c64t.git
+else
+	fetch_repo bios git://github.com/mobiaqua/ti-sysbios.git
+fi
 fetch_repo ce git://github.com/mobiaqua/ti-ce.git
 fetch_repo fc git://github.com/mobiaqua/ti-fc.git
 fetch_repo ipc git://github.com/mobiaqua/ti-ipc1.git
