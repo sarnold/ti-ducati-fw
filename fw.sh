@@ -91,7 +91,7 @@ prepare_arm_compiler()
 				downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
 				;;
 			esac
-			mv ti-cgt-arm_* armt
+			mv arm_* armt
 			rm -rf downloads
 			rm -f *.zip
 			;;
@@ -102,7 +102,7 @@ prepare_arm_compiler()
 
 GCC=no # GCC not supported yet, still issues with memory regions while linking
 C64T=yes
-TCGARMVERSION=5.2.7
+TCGARMVERSION=5.2.8
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 if [ "$C64T" == "yes" ]; then
 	XDCCOREVERSION=3_31_03_43
