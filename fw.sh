@@ -102,7 +102,7 @@ prepare_arm_compiler()
 
 GCC=no # GCC not supported yet, still issues with memory regions while linking
 C64T=yes
-TCGARMVERSION=5.2.8
+TCGARMVERSION=5.2.9
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 if [ "$C64T" == "yes" ]; then
 	XDCCOREVERSION=3_31_03_43
