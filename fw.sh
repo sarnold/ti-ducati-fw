@@ -91,7 +91,7 @@ prepare_arm_compiler()
 				downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
 				;;
 			esac
-			mv arm_* armt
+			mv *arm_* armt
 			rm -rf downloads
 			rm -f *.zip
 			;;
