@@ -58,56 +58,34 @@ prepare_arm_compiler()
 {
 	cd ${BUILD_DIR}
 	if [ ! -e ${BUILD_DIR}/armt ]; then
-		case $GCC in
-		yes)
-			# TODO: original toolchain from site does not have needed libc lock changes.
-			# it need to bo patched and rebuilded
-			case `uname -s` in
-			Darwin)
-				wget https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-mac.tar.bz2
-				#wget https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q3-update/+download/gcc-arm-none-eabi-4_7-2013q3-20130916-mac.tar.bz2
-				;;
-			Linux)
-				wget https://launchpad.net/gcc-arm-embedded/4.8/4.8-2014-q3-update/+download/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2
-				#wget https://launchpad.net/gcc-arm-embedded/4.7/4.7-2013-q3-update/+download/gcc-arm-none-eabi-4_7-2013q3-20130916-linux.tar.bz2
-				;;
-			esac
-			tar xjvf gcc-arm-none-eabi-4*.tar.bz2
-			rm -f *.bz2
-			mv gcc-arm-none-eabi-4_* armt
+		case `uname -s` in
+		Darwin)
+			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2mac/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.mac_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_osx_installer.zip
+			unzip ti_cgt_tms470*.zip
+			chmod +x downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel
+			downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel --mode unattended
 			;;
-		*)
-			case `uname -s` in
-			Darwin)
-				wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2mac/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.mac_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_osx_installer.zip
-				unzip ti_cgt_tms470*.zip
-				chmod +x downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel
-				downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel --mode unattended
-				;;
-			Linux)
-				wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.linux_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.zip
-				unzip ti_cgt_tms470*.zip
-				chmod +x downloads/*.bin
-				downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
-				;;
-			esac
-			mv *arm_* armt
-			rm -rf downloads
-			rm -f *.zip
+		Linux)
+			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.linux_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.zip
+			unzip ti_cgt_tms470*.zip
+			chmod +x downloads/*.bin
+			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
 			;;
 		esac
+		mv *arm_* armt
+		rm -rf downloads
+		rm -f *.zip
 	fi
 	cd ${BASE_ROOT}
 }
 
-GCC=no # GCC not supported yet, still issues with memory regions while linking
 C64T=yes
 TCGARMVERSION=5.2.9
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 if [ "$C64T" == "yes" ]; then
 	XDCCOREVERSION=3_31_03_43
 else
-	XDCCOREVERSION=3_32_01_22
+	XDCCOREVERSION=3.50.03.33
 fi
 
 check_tools
@@ -133,10 +111,6 @@ fetch_repo codecs git://github.com/mobiaqua/ti-codecs.git
 prepare_xdc_tools
 prepare_arm_compiler
 
-if [ "$GCC" == "yes" ]; then
-	TARGET=gnu.targets.arm.M3
-else
-	TARGET=ti.targets.arm.elf.M3
-fi
+TARGET=ti.targets.arm.elf.M3
 
 make -C ${BASE_ROOT} TARGET=${TARGET} all
