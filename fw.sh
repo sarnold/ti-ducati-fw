@@ -79,13 +79,13 @@ prepare_arm_compiler()
 	cd ${BASE_ROOT}
 }
 
-C64T=yes
+C64T=no
 TCGARMVERSION=5.2.9
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 if [ "$C64T" == "yes" ]; then
 	XDCCOREVERSION=3_31_03_43
 else
-	XDCCOREVERSION=3.50.03.33
+	XDCCOREVERSION=3.50.04.43
 fi
 
 check_tools
