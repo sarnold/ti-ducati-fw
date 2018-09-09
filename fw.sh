@@ -85,7 +85,7 @@ TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 if [ "$C64T" == "yes" ]; then
 	XDCCOREVERSION=3_31_03_43
 else
-	XDCCOREVERSION=3.50.06.19
+	XDCCOREVERSION=3_50_08_24
 fi
 
 check_tools
