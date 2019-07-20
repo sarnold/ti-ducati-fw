@@ -22,14 +22,14 @@ fetch_repo() # directory, repo-url
 check_tools()
 {
 	ZIP=`zip -v 2> /dev/null`
-	WGET=`wget --version 2> /dev/null`
+	CURL=`curl --version 2> /dev/null`
 
-	if [ "$ZIP" == "" ]; then
+	if [ "$CURL" == "" ]; then
 		echo "Error: Missing zip tool!"
 		exit 1
 	fi
 
-	if [ "$WGET" == "" ]; then
+	if [ "$CURL" == "" ]; then
 		echo "Error: Missing wget tool!"
 		exit 1
 	fi
@@ -41,10 +41,12 @@ prepare_xdc_tools()
 	if [ ! -e ${BUILD_DIR}/xdc ]; then
 		case `uname -s` in
 		Darwin)
-			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${XDCCOREVERSION}/exports/xdccore/xdctools_${XDCCOREVERSION}_core_macos.zip
+			curl http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${XDCCOREVERSION}/exports/xdccore/xdctools_${XDCCOREVERSION}_core_macos.zip?tracked=1 \
+			--output xdctools_${XDCCOREVERSION}_core_macos.zip
 			;;
 		Linux)
-			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${XDCCOREVERSION}/exports/xdccore/xdctools_${XDCCOREVERSION}_core_linux.zip
+			curl http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/rtsc/${XDCCOREVERSION}/exports/xdccore/xdctools_${XDCCOREVERSION}_core_linux.zip?tracked=1 \
+			--output xdctools_${XDCCOREVERSION}_core_linux.zip
 		;;
 		esac
 		unzip xdctools_*_core_*.zip
@@ -60,13 +62,15 @@ prepare_arm_compiler()
 	if [ ! -e ${BUILD_DIR}/armt ]; then
 		case `uname -s` in
 		Darwin)
-			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2mac/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.mac_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_osx_installer.zip
+			curl http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2mac/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.mac_root_${TCGARMVERSION}?tracked=1 \
+				--output ti_cgt_tms470_${TCGARMVERSION}_osx_installer.zip
 			unzip ti_cgt_tms470*.zip
 			chmod +x downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel
 			downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel --mode unattended
 			;;
 		Linux)
-			wget http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.linux_root_${TCGARMVERSION} -O ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.zip
+			curl http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.linux_root_${TCGARMVERSION}?tracked=1 \
+				--output ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.zip
 			unzip ti_cgt_tms470*.zip
 			chmod +x downloads/*.bin
 			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
@@ -85,7 +89,7 @@ TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 if [ "$C64T" == "yes" ]; then
 	XDCCOREVERSION=3_31_03_43
 else
-	XDCCOREVERSION=3_51_01_18
+	XDCCOREVERSION=3_51_03_28
 fi
 
 check_tools
