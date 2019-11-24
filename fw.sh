@@ -62,29 +62,29 @@ prepare_arm_compiler()
 	if [ ! -e ${BUILD_DIR}/armt ]; then
 		case `uname -s` in
 		Darwin)
-			curl http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2mac/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.mac_root_${TCGARMVERSION}?tracked=1 \
+			curl http://downloads.ti.com/codegen/esd/cgt_public_sw/TMS470/${TCGARMVERSION}/ti_cgt_tms470_${TCGARMVERSION}_osx_installer.app.zip?tracked=1 \
 				--output ti_cgt_tms470_${TCGARMVERSION}_osx_installer.zip
 			unzip ti_cgt_tms470*.zip
-			chmod +x downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel
-			downloads/ti_cgt_tms470_*_osx_installer.app/Contents/MacOS/osx-intel --mode unattended
+			ti_cgt_tms470_*/Contents/MacOS/osx-x86_64 --mode unattended --prefix .
+			mv ti-cgt-arm* armt
+			rm -rf ti_cgt_tms470_*
+			rm -f *.zip
 			;;
 		Linux)
-			curl http://software-dl.ti.com/dsps/dsps_public_sw/sdo_ccstudio/codegen/Updates/p2linux/binary/com.ti.cgt.tms470.${TCGARMMAJORVERSION}.linux_root_${TCGARMVERSION}?tracked=1 \
-				--output ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.zip
-			unzip ti_cgt_tms470*.zip
-			chmod +x downloads/*.bin
-			downloads/ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended
+			curl http://downloads.ti.com/codegen/esd/cgt_public_sw/TMS470/${TCGARMVERSION}/ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.bin?tracked=1 \
+				--output ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.bin
+			chmod +x *.bin
+			ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
+			mv ti-cgt-arm* armt
+			rm -rf ti_cgt_tms470_*
 			;;
 		esac
-		mv *arm_* armt
-		rm -rf downloads
-		rm -f *.zip
 	fi
 	cd ${BASE_ROOT}
 }
 
 C64T=no
-TCGARMVERSION=5.2.9
+TCGARMVERSION=18.12.4.LTS
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 if [ "$C64T" == "yes" ]; then
 	XDCCOREVERSION=3_31_03_43
