@@ -2,21 +2,21 @@ include Rules.make
 
 .PHONY:	all clean base ipu ipu_clean
 
-all: bios osal ipc xdais fc ce rpmsg ipumm
+all: bios osal ipc xdais fc ce ipumm
 
 base: bios osal ipc xdais fc ce
 
-ipu: base rpmsg ipumm
+ipu: base ipumm
 
-ipu_clean: rpmsg_clean ipumm_clean
+ipu_clean: ipumm_clean
 
-clean: bios_clean osal_clean ipc_clean xdais_clean fc_clean ce_clean rpmsg_clean ipumm_clean
+clean: bios_clean osal_clean ipc_clean xdais_clean fc_clean ce_clean ipumm_clean
 
 ipc:
-	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) -ef ipc.mak all
+	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) -ef ipc-bios.mak all
 
 ipc_clean:
-	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) -f ipc.mak clean
+	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) -f ipc-bios.mak clean
 
 fc:
 	$(MAKE) -C $(FC_INSTALL_DIR) $(FC_CONF) -ef fc.mak all
@@ -47,12 +47,6 @@ bios:
 
 bios_clean:
 	$(MAKE) -C $(BIOS_INSTALL_DIR) $(BIOS_CONF) -f bios.mak clean
-
-rpmsg:.
-	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) all
-
-rpmsg_clean:
-	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) clean
 
 ipumm:
 	$(MAKE) -C $(IPUMM_INSTALL_DIR) $(IPUMM_CONF) all

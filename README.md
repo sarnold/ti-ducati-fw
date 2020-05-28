@@ -1,1 +1,1 @@
-This is build script for OMAP4 Ducati FW.
+This is build script for Ducati FW.

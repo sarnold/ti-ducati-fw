@@ -105,11 +105,10 @@ else
 fi
 fetch_repo ce git://github.com/mobiaqua/ti-ce.git
 fetch_repo fc git://github.com/mobiaqua/ti-fc.git
-fetch_repo ipc git://github.com/mobiaqua/ti-ipc1.git
+fetch_repo ipc git://github.com/mobiaqua/ti-ipcdev.git
 fetch_repo osal git://github.com/mobiaqua/ti-osal.git
 fetch_repo xdais git://github.com/mobiaqua/ti-xdais.git
-fetch_repo rpmsg git://github.com/mobiaqua/ti-rpmsg.git
-fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm-omap4.git
+fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm.git
 fetch_repo codecs git://github.com/mobiaqua/ti-codecs.git
 
 prepare_xdc_tools
