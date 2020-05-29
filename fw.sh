@@ -115,5 +115,8 @@ prepare_xdc_tools
 prepare_arm_compiler
 
 TARGET=ti.targets.arm.elf.M3
+PLATFORM=OMAP44XX
+PROFILE=release
+TRACELEVEL=0
 
-make -C ${BASE_ROOT} TARGET=${TARGET} all
+make -C ${BASE_ROOT} TARGET=${TARGET} PLATFORM=${PLATFORM} PROFILE=${PROFILE} TRACELEVEL=${TRACELEVEL} all
