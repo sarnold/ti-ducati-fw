@@ -74,7 +74,7 @@ prepare_arm_compiler()
 			curl http://downloads.ti.com/codegen/esd/cgt_public_sw/TMS470/${TCGARMVERSION}/ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.bin?tracked=1 \
 				--output ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.bin
 			chmod +x *.bin
-			ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
+			./ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
 			mv ti-cgt-arm* armt
 			rm -rf ti_cgt_tms470_*
 			;;
