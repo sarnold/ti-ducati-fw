@@ -24,13 +24,13 @@ check_tools()
 	ZIP=`zip -v 2> /dev/null`
 	CURL=`curl --version 2> /dev/null`
 
-	if [ "$CURL" == "" ]; then
+	if [ "$ZIP" == "" ]; then
 		echo "Error: Missing zip tool!"
 		exit 1
 	fi
 
 	if [ "$CURL" == "" ]; then
-		echo "Error: Missing wget tool!"
+		echo "Error: Missing curl tool!"
 		exit 1
 	fi
 }
