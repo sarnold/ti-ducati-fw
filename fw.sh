@@ -86,11 +86,7 @@ prepare_arm_compiler()
 C64T=no
 TCGARMVERSION=18.12.4.LTS
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
-if [ "$C64T" == "yes" ]; then
-	XDCCOREVERSION=3_31_03_43
-else
-	XDCCOREVERSION=3_55_02_22
-fi
+XDCCOREVERSION=3_55_02_22
 
 check_tools
 
