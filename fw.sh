@@ -108,8 +108,8 @@ fetch_repo codecs git://github.com/mobiaqua/ti-codecs.git
 
 if [ "$OLD_DCE" == "yes" ]; then
 	fetch_repo ipc git://github.com/mobiaqua/ti-ipc1.git
-	ln -s ipc.mak ${BUILD_DIR}/ipc/ipc-bios.mak
-	ln -s ipc.bld ${BUILD_DIR}/ipc/ipc-bios.bld
+	ln -s ipc.mak ${BUILD_DIR}/ipc/ipc-bios.mak 2> /dev/null
+	ln -s ipc.bld ${BUILD_DIR}/ipc/ipc-bios.bld 2> /dev/null
 	fetch_repo rpmsg git://github.com/mobiaqua/ti-rpmsg.git
 	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm-omap4.git
 else
