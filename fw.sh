@@ -84,6 +84,7 @@ prepare_arm_compiler()
 }
 
 C64T=no
+OLD_DCE=yes
 TCGARMVERSION=18.12.4.LTS
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 XDCCOREVERSION=3_55_02_22
@@ -101,11 +102,18 @@ else
 fi
 fetch_repo ce git://github.com/mobiaqua/ti-ce.git
 fetch_repo fc git://github.com/mobiaqua/ti-fc.git
-fetch_repo ipc git://github.com/mobiaqua/ti-ipcdev.git
 fetch_repo osal git://github.com/mobiaqua/ti-osal.git
 fetch_repo xdais git://github.com/mobiaqua/ti-xdais.git
-fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm.git
 fetch_repo codecs git://github.com/mobiaqua/ti-codecs.git
+
+if [ "$OLD_DCE" == "yes" ]; then
+	fetch_repo ipc git://github.com/mobiaqua/ti-ipc1.git
+	fetch_repo rpmsg git://github.com/mobiaqua/ti-rpmsg.git
+	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm-omap4.git
+else
+	fetch_repo ipc git://github.com/mobiaqua/ti-ipcdev.git
+	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm.git
+fi
 
 prepare_xdc_tools
 prepare_arm_compiler

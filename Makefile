@@ -1,16 +1,16 @@
 include Rules.make
 
-.PHONY:	all clean base ipu ipu_clean
+.PHONY: all clean base ipu ipu_clean
 
-all: bios osal ipc xdais fc ce ipumm
+all: bios osal ipc xdais fc ce rpmsg ipumm
 
 base: bios osal ipc xdais fc ce
 
-ipu: base ipumm
+ipu: base rpmsg ipumm
 
-ipu_clean: ipumm_clean
+ipu_clean: rpmsg_clean ipumm_clean
 
-clean: bios_clean osal_clean ipc_clean xdais_clean fc_clean ce_clean ipumm_clean
+clean: bios_clean osal_clean ipc_clean xdais_clean fc_clean ce_clean rpmsg_clean ipumm_clean
 
 ipc:
 	$(MAKE) -C $(IPC_INSTALL_DIR) $(IPC_CONF) -ef ipc-bios.mak all
@@ -47,6 +47,12 @@ bios:
 
 bios_clean:
 	$(MAKE) -C $(BIOS_INSTALL_DIR) $(BIOS_CONF) -f bios.mak clean
+
+rpmsg:
+	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) all
+
+rpmsg_clean:
+	$(MAKE) -C $(RPMSG_INSTALL_DIR) $(RPMSG_CONF) clean
 
 ipumm:
 	$(MAKE) -C $(IPUMM_INSTALL_DIR) $(IPUMM_CONF) all
