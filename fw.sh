@@ -83,6 +83,7 @@ prepare_arm_compiler()
 	cd ${BASE_ROOT}
 }
 
+OMAP5=no
 C64T=no
 OLD_IPC=yes
 TCGARMVERSION=18.12.4.LTS
@@ -106,25 +107,43 @@ fetch_repo osal git://github.com/mobiaqua/ti-osal.git
 fetch_repo xdais git://github.com/mobiaqua/ti-xdais.git
 fetch_repo codecs git://github.com/mobiaqua/ti-codecs.git
 
-if [ "$OLD_IPC" == "yes" ]; then
+if [ "$OLD_IPC" == "yes" ] && [ "$OMAP5" != "yes" ]; then
 	fetch_repo ipc git://github.com/mobiaqua/ti-ipc1.git
 	ln -s ipc.mak ${BUILD_DIR}/ipc/ipc-bios.mak 2> /dev/null
 	ln -s ipc.bld ${BUILD_DIR}/ipc/ipc-bios.bld 2> /dev/null
 	fetch_repo rpmsg git://github.com/mobiaqua/ti-rpmsg.git
 	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm-omap4.git
+elif [ "$OMAP5" == "yes" ]; then
+	fetch_repo ipc git://github.com/mobiaqua/ti-ipc-omap5.git
+	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm.git
+	mkdir -p ${BUILD_DIR}/rpmsg
+	echo "all:" > ${BUILD_DIR}/rpmsg/Makefile
+	echo "	@echo nothing" >> ${BUILD_DIR}/rpmsg/Makefile
 else
 	fetch_repo ipc git://github.com/mobiaqua/ti-ipcdev.git
 	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm.git
+	mkdir -p ${BUILD_DIR}/rpmsg
+	echo "all:" > ${BUILD_DIR}/rpmsg/Makefile
+	echo "	@echo nothing" >> ${BUILD_DIR}/rpmsg/Makefile
 fi
 
 prepare_xdc_tools
 prepare_arm_compiler
 
 BIOS_TYPE=SMP
-TARGET=ti.targets.arm.elf.M3
-PLATFORM=OMAP44XX
-HW_TYPE=OMAP4
-HW_VER=ES20
+
+if [ "$OMAP5" == "yes" ]; then
+	TARGET=ti.targets.arm.elf.M4
+	PLATFORM=OMAP54XX
+	HW_TYPE=OMAP5
+	HW_VER=ES20
+else
+	TARGET=ti.targets.arm.elf.M3
+	PLATFORM=OMAP44XX
+	HW_TYPE=OMAP4
+	HW_VER=ES20
+fi
+
 PROFILE=release
 TRACELEVEL=0
 
