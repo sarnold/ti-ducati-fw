@@ -115,7 +115,7 @@ if [ "$OLD_IPC" == "yes" ] && [ "$OMAP5" != "yes" ]; then
 	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm-omap4.git
 elif [ "$OMAP5" == "yes" ]; then
 	fetch_repo ipc git://github.com/mobiaqua/ti-ipc-omap5.git
-	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm.git
+	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm-omap5.git
 	mkdir -p ${BUILD_DIR}/rpmsg
 	echo "all:" > ${BUILD_DIR}/rpmsg/Makefile
 	echo "	@echo nothing" >> ${BUILD_DIR}/rpmsg/Makefile
