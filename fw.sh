@@ -107,13 +107,7 @@ fetch_repo osal git://github.com/mobiaqua/ti-osal.git
 fetch_repo xdais git://github.com/mobiaqua/ti-xdais.git
 fetch_repo codecs git://github.com/mobiaqua/ti-codecs.git
 
-if [ "$OLD_IPC" == "yes" ] && [ "$OMAP5" != "yes" ]; then
-	fetch_repo ipc git://github.com/mobiaqua/ti-ipc1.git
-	ln -s ipc.mak ${BUILD_DIR}/ipc/ipc-bios.mak 2> /dev/null
-	ln -s ipc.bld ${BUILD_DIR}/ipc/ipc-bios.bld 2> /dev/null
-	fetch_repo rpmsg git://github.com/mobiaqua/ti-rpmsg.git
-	fetch_repo ipumm git://github.com/mobiaqua/ti-ipumm-omap4.git
-elif [ "$OLD_IPC" == "yes" ] && [ "$OMAP5" == "yes" ]; then
+if [ "$OLD_IPC" == "yes" ]; then
 	fetch_repo ipc git://github.com/mobiaqua/ti-ipc1.git
 	ln -s ipc.mak ${BUILD_DIR}/ipc/ipc-bios.mak 2> /dev/null
 	ln -s ipc.bld ${BUILD_DIR}/ipc/ipc-bios.bld 2> /dev/null
