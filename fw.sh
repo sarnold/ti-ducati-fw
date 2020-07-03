@@ -144,6 +144,10 @@ else
 	HW_VER=ES20
 fi
 
+if [ "$OLD_IPC" == "yes" ]; then
+	TARGET=ti.targets.arm.elf.M3
+fi
+
 PROFILE=release
 TRACELEVEL=0
 
