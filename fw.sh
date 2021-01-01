@@ -84,8 +84,6 @@ prepare_arm_compiler()
 }
 
 build_fw() {
-	#rm -rf sources
-
 	mkdir -f ${BUILD_DIR} 2> /dev/null
 
 	if [ "$C64T" == "yes" ]; then
@@ -113,7 +111,7 @@ build_fw() {
 C64T=no
 TCGARMVERSION=18.12.7.LTS
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
-XDCCOREVERSION=3_55_02_22
+XDCCOREVERSION=3_62_00_08
 JOBS=8
 
 check_tools
