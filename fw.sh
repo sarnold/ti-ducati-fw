@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#set -x
+
 fetch_repo() # directory, repo-url
 {
 	directory="${BUILD_DIR}/$1"
@@ -71,10 +73,10 @@ prepare_arm_compiler()
 			rm -f *.zip
 			;;
 		Linux)
-			curl http://downloads.ti.com/codegen/esd/cgt_public_sw/TMS470/${TCGARMVERSION}/ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.bin?tracked=1 \
-				--output ti_cgt_tms470_${TCGARMVERSION}_linux_installer_x86.bin
+			curl http://downloads.ti.com/codegen/esd/cgt_public_sw/TMS470/${TCGARMVERSION}/ti_cgt_tms470_${TCGARMVERSION}_linux-x64_installer.bin?tracked=1 \
+				--output ti_cgt_tms470_${TCGARMVERSION}_linux-x64_installer.bin
 			chmod +x *.bin
-			./ti_cgt_tms470_*_linux_installer_x86.bin --mode unattended --prefix .
+			./ti_cgt_tms470_*_linux-x64_installer.bin --mode unattended --prefix .
 			mv ti-cgt-arm* armt
 			rm -rf ti_cgt_tms470_*
 			;;
@@ -109,7 +111,7 @@ build_fw() {
 }
 
 C64T=no
-TCGARMVERSION=20.2.4.LTS
+TCGARMVERSION=20.2.5.LTS
 TCGARMMAJORVERSION=`echo ${TCGARMVERSION} | cut -c 1-3`
 XDCCOREVERSION=3_62_00_08
 JOBS=8
